@@ -299,6 +299,10 @@ void InspectorDock::_prepare_resource_extra_popup() {
 	popup->set_item_disabled(popup->get_item_index(RESOURCE_EDIT_CLIPBOARD), r.is_null());
 }
 
+void InspectorDock::_toggle_inspector_pin_current_node() {
+	inspector->set_inspector_node_pinned(!inspector->is_inspector_node_pinned());
+}
+
 void InspectorDock::_prepare_history() {
 	EditorSelectionHistory *editor_history = EditorNode::get_singleton()->get_editor_selection_history();
 
@@ -598,6 +602,12 @@ InspectorDock::InspectorDock(EditorData &p_editor_data) {
 	resource_save_button->get_popup()->connect("id_pressed", callable_mp(this, &InspectorDock::_menu_option));
 	resource_save_button->set_focus_mode(Control::FOCUS_NONE);
 	resource_save_button->set_disabled(true);
+
+	pin_inspector_button = memnew(CheckButton);
+	pin_inspector_button->set_tooltip(TTR("Pin the current element in inspector view."));
+	general_options_hb->add_child(pin_inspector_button);
+	pin_inspector_button->connect("pressed", callable_mp(this, &InspectorDock::_toggle_inspector_pin_current_node));
+	pin_inspector_button->set_focus_mode(Control::FOCUS_NONE);
 
 	resource_extra_button = memnew(MenuButton);
 	resource_extra_button->set_tooltip(TTR("Extra resource options."));

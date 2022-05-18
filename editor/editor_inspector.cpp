@@ -3027,6 +3027,9 @@ void EditorInspector::edit(Object *p_object) {
 	if (object == p_object) {
 		return;
 	}
+	if (inspector_node_pinned) {
+		return;
+	}
 	if (object) {
 		_clear();
 		object->disconnect("property_list_changed", callable_mp(this, &EditorInspector::_changed_callback));
@@ -3698,6 +3701,14 @@ void EditorInspector::set_property_clipboard(const Variant &p_value) {
 
 Variant EditorInspector::get_property_clipboard() const {
 	return property_clipboard;
+}
+
+void EditorInspector::set_inspector_node_pinned(bool p_enabled) {
+	inspector_node_pinned = p_enabled;
+}
+
+bool EditorInspector::is_inspector_node_pinned() {
+	return inspector_node_pinned;
 }
 
 void EditorInspector::_add_meta_confirm() {

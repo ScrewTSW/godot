@@ -40,6 +40,7 @@
 #include "scene/gui/dialogs.h"
 #include "scene/gui/line_edit.h"
 #include "scene/gui/menu_button.h"
+#include "scene/gui/check_button.h"
 #include "scene/gui/tree.h"
 
 class EditorFileDialog;
@@ -84,6 +85,7 @@ class InspectorDock : public VBoxContainer {
 	Button *resource_new_button = nullptr;
 	Button *resource_load_button = nullptr;
 	MenuButton *resource_save_button = nullptr;
+	CheckButton *pin_inspector_button = nullptr;
 	MenuButton *resource_extra_button = nullptr;
 	MenuButton *history_menu = nullptr;
 	LineEdit *search = nullptr;
@@ -115,6 +117,7 @@ class InspectorDock : public VBoxContainer {
 	void _copy_resource();
 	void _paste_resource();
 	void _prepare_resource_extra_popup();
+	void _toggle_inspector_pin_current_node();
 
 	void _warning_pressed();
 	void _resource_created();
